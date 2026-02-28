@@ -14,7 +14,7 @@ Regex to match markdown tokens. The tokens are special sequences in markdown tha
 """
 
 
-HTML_TOKEN_REGEX = "<span class='pj-token' style='display: none;'>.*<\/span>"
+HTML_TOKEN_REGEX = r"<span class='pj-token' style='display: none;'>.*</span>"
 """
 Regex to match html tokens.
 """
