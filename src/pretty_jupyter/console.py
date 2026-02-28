@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 import click
-import pkg_resources
+from importlib.resources import files
 from nbconvert.exporters import HTMLExporter, LatexExporter, PDFExporter
 from traitlets.config import Config
 
@@ -12,13 +12,10 @@ from traitlets.config import Config
 @click.command()
 @click.argument("out_path", type=click.Path())
 def quickstart(out_path):
-    in_path = pkg_resources.resource_filename(
-        "pretty_jupyter", os.path.join("quickstart", "empty.ipynb")
-    )
+    in_path = files("pretty_jupyter").joinpath("quickstart", "empty.ipynb")
 
-    with open(in_path, "r") as file_r, open(out_path, "w") as file_w:
-        in_text = file_r.read()
-        file_w.write(in_text)
+    with open(out_path, "w") as file_w:
+        file_w.write(in_path.read_text())
 
 
 @click.command("nbconvert-dev")
@@ -39,7 +36,7 @@ def nbconvert_dev(input, to, out, include_input):
     config = Config()
     config.TemplateExporter.template_name = template_map[to]
     config.TemplateExporter.extra_template_basedirs = [
-        pkg_resources.resource_filename("pretty_jupyter", "templates")
+        str(files("pretty_jupyter").joinpath("templates"))
     ]
     config.TemplateExporter.exclude_input = not include_input
 
@@ -73,7 +70,7 @@ def install_dev():
 
     for src_template in src_templates:
         src_folder = os.path.join(
-            pkg_resources.resource_filename("pretty_jupyter", "templates"), src_template
+            str(files("pretty_jupyter").joinpath("templates")), src_template
         )
         target_folder = os.path.join(
             sys.prefix, f"share/jupyter/nbconvert/templates/{src_template}"

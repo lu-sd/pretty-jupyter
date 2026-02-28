@@ -17,7 +17,8 @@ dependencies = [
     "ipython-genutils>=0.1",
     "pyyaml>=5",
     "cerberus>=1.1",
-    "lxml_html_clean"
+    "lxml_html_clean",
+    "importlib_resources;python_version<\"3.9\""
 ]
 requires-python = ">=3.7"
 classifiers = [

@@ -1,4 +1,7 @@
-import pkg_resources
+try:
+    from importlib.resources import files
+except ImportError:
+    from importlib_resources import files
 
 MARKDOWN_TOKEN_REGEX = r"\s*\[.+\]:\s*(?:(?:<>)|#)\s*\(-\.-\s+(.*)\)"
 """
@@ -43,7 +46,7 @@ Regex to match markdown metadata tokens.
 ```
 """
 
-CONFIG_DIR = pkg_resources.resource_filename("pretty_jupyter", "config")
+CONFIG_DIR = str(files("pretty_jupyter").joinpath("config"))
 
 AVAILABLE_THEMES = [
     "bootstrap",

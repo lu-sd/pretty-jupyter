@@ -1,7 +1,7 @@
 import os
+from importlib.resources import files
 from pathlib import Path
 
-import pkg_resources
 import pytest
 import selenium.webdriver
 from selenium.webdriver.chrome.options import Options
@@ -41,7 +41,7 @@ def fixture_dir():
 
 @pytest.fixture
 def templates_path():
-    return str(Path(pkg_resources.resource_filename("pretty_jupyter", "templates")).as_posix())
+    return str(files("pretty_jupyter").joinpath("templates"))
 
 
 @pytest.fixture

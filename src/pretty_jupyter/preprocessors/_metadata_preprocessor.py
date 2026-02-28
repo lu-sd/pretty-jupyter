@@ -5,7 +5,6 @@ from pathlib import Path
 
 import jinja2
 import nbconvert
-import pkg_resources
 import yaml
 from cerberus import Validator
 from nbconvert.preprocessors import Preprocessor
